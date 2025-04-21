@@ -7,8 +7,40 @@ const router = express.Router()
 
 router.post('/users', async (req, res, next) => {
     try {
+        const { email } = req.body
+        const [existing] = await db
+            .select()
+            .from(users)
+            .where(eq(users.email, email))
+
+        if (existing) {
+            return res
+                .status(409)
+                .json({ message: `User with ${email} already exists` })
+        }
+
         await db.insert(users).values(req.body)
         res.sendStatus(201)
+    } catch (err) {
+        next(err)
+    }
+})
+
+
+router.delete('/users/:id', async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const found = await db
+            .select()
+            .from(users)
+            .where(eq(users.id, Number(id)))
+        if (found.length === 0) {
+            return res.status(404).json({ message: `User with id = ${id} not found` })
+        }
+        await db
+            .delete(users)
+            .where(eq(users.id, Number(id)))
+        res.status(200).json({ message: `User with id = ${id} deleted successfully` })
     } catch (err) {
         next(err)
     }
