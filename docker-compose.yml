@@ -3,19 +3,19 @@ version: '3.8'
 services:
   postgres:
     image: postgres
-    container_name: node_course_postgres_container
+    container_name: course_postgres
     environment:
-      POSTGRES_USER: nodejs_course_admin
-      POSTGRES_PASSWORD: my_password
-      POSTGRES_DB: nodejs_course_database
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_password
+      POSTGRES_DB: node_course_db
     ports:
       - "5432:5432"
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: node_course_pgadmin_container
+    container_name: course_pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_EMAIL: admin@khai.edu
       PGADMIN_DEFAULT_PASSWORD: admin_password
       PGADMIN_LISTEN_PORT: 8080
       PGADMIN_SERVER_PORT: 5432
