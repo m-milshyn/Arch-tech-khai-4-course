@@ -6,6 +6,7 @@
   "author": "Mykyta Milshyn",
   "scripts": {
     "start": "node src/index.js",
+    "server": "node --watch src/index.js",
     "dev": "nodemon src/index.js",
     "migration:generate": "drizzle-kit generate:pg --config=drizzle.config.js",
     "migration:push": "drizzle-kit push:pg",
