@@ -1,12 +1,12 @@
-const express = require('express');
-const userRouter = require('./user/user.router');
-const productRouter = require('./product/product.router');
-const { logRequest } = require('./middleware');
-const bodyParser = require('body-parser');
-const { errorResponder } = require('./error.middleware');
+import express from 'express';
+import bodyParser from 'body-parser';
+import { logRequest } from './middleware.js';
+import productRouter from './product/product.router.js';
+import userRouter from './user/user.router.js';
+import { errorResponder } from './error.middleware.js';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(logRequest);
